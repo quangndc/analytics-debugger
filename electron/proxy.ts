@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import type { ProxyContext, GA4Request, ProxyError } from './types/proxy';
 
 const require = createRequire(import.meta.url);
-const Proxy = require('http-mitm-proxy');
+const { Proxy } = require('http-mitm-proxy');
 
 const TOKEN_FILE = 'proxy-token.txt';
 const MAX_BACKUPS = 5;
@@ -107,7 +107,7 @@ function isValidUrl(url: string): boolean {
 }
 
 export function startProxy(win: BrowserWindow | null, port: number = 8888) {
-    const proxy = Proxy();
+    const proxy = new Proxy();
     const userData = app.getPath('userData');
     const certsDir = path.join(userData, 'certs');
     const proxyToken = getProxyToken();
